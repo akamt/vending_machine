@@ -14,30 +14,30 @@ RSpec.describe VendingMachine do
       let(:money) { Money.new(100) }
 
       it "自動販売機は100円持っている" do
-        is_expected.to eq 100
-        expect(machine.money).to eq 100
+        is_expected.to eq Money.new(100)
+        expect(machine.money).to eq Money.new(100)
       end
     end
 
     context "空の自動販売機に200円入れた場合" do
-      let(:money) { 200 }
+      let(:money) { Money.new(200) }
 
       it "自動販売機は200円持っている" do
-        is_expected.to eq 200
-        expect(machine.money).to eq 200
+        is_expected.to eq Money.new(200)
+        expect(machine.money).to eq Money.new(200)
       end
     end
 
     context "事前に100円入っている自動販売機に100円入れた場合" do
       before {
-        machine.put_money(100)
+        machine.put_money(Money.new(100))
       }
 
-      let(:money) { 100 }
+      let(:money) { Money.new(100) }
 
       it "自動販売機は200円持っている" do
-        is_expected.to eq 200
-        expect(machine.money).to eq 200
+        is_expected.to eq Money.new(200)
+        expect(machine.money).to eq Money.new(200)
       end
     end
   end
@@ -45,8 +45,8 @@ RSpec.describe VendingMachine do
   describe "#select" do
     let(:stocks) {
       [
-        Drink.new(name: "cola",    price: 150),
-        Drink.new(name: "ayataka", price: 130),
+        Drink.new(name: "cola",    price: Money.new(150)),
+        Drink.new(name: "ayataka", price: Money.new(130)),
       ]
     }
     let(:machine) { VendingMachine.new(stocks) }
@@ -55,7 +55,7 @@ RSpec.describe VendingMachine do
 
     shared_context "1000円入れた状態" do
       before {
-        machine.put_money(1000)
+        machine.put_money(Money.new(1000))
       }
     end
 
@@ -99,7 +99,7 @@ RSpec.describe VendingMachine do
 
     context "100円入れた状態で綾鷹を選択した場合" do
       before {
-        machine.put_money(100)
+        machine.put_money(Money.new(100))
       }
 
       let(:drink) {'ayataka'}
@@ -111,8 +111,8 @@ RSpec.describe VendingMachine do
   describe "#get_change" do
     let(:stocks) {
       [
-        Drink.new(name: "cola",    price: 150),
-        Drink.new(name: "ayataka", price: 130),
+        Drink.new(name: "cola",    price: Money.new(150)),
+        Drink.new(name: "ayataka", price: Money.new(130)),
       ]
     }
 
@@ -121,40 +121,41 @@ RSpec.describe VendingMachine do
 
     context "何も入れていない場合" do
       it "0円" do
-        is_expected.to eq 0
+        is_expected.to eq Money.new(0)
       end
     end
 
     context "100円入れた状態でお釣りを返す場合" do
       before {
-        machine.put_money(100)
+        machine.put_money(Money.new(100))
       }
 
       it "100円が返ってくる" do
-        is_expected.to eq 100
+        is_expected.to eq Money.new(100)
       end
     end
 
     context "500円入れた状態で綾鷹を買った場合" do
       before {
-        machine.put_money(500)
+        machine.put_money(Money.new(500))
         machine.select('ayataka')
       }
 
       it "370円返ってくる" do
-        is_expected.to eq 370
+        is_expected.to eq Money.new(370)
       end
     end
 
     context "500円入れた状態で綾鷹を買って、お釣りを返してもらった状態の場合" do
       before {
-        machine.put_money(500)
+        machine.put_money(Money.new(500))
         machine.select('ayataka')
         machine.get_change
       }
 
       it "0円返ってくる" do
-        is_expected.to eq 0
+        is_expected.to eq Money.new(0)
+        
       end
     end
   end

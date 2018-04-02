@@ -45,4 +45,17 @@ RSpec.describe Money do
       }
     end
   end
+
+  describe "#-" do
+    subject { money_a - money_b }
+
+    context "300円から100円を引く" do
+      let(:money_a) { Money.new(300) }
+      let(:money_b) { Money.new(100) }
+
+      it {
+        is_expected.to eq Money.new(200)
+      }
+    end
+  end
 end
