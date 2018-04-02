@@ -20,7 +20,7 @@ class VendingMachine
 
   def select(drink)
     stock = @stocks.find{|x| x.name == drink}
-    if stock && stock.price.amount <= @value.amount
+    if stock && stock.price <= @value
       # 買える時
       @value -= stock.price
       drink
