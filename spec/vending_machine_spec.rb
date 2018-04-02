@@ -53,10 +53,15 @@ RSpec.describe VendingMachine do
 
     subject { machine.select(drink) }
 
-    context "自動販売機でコーラを選んだ場合" do
+    shared_context "1000円入れた状態" do
       before {
         machine.put_money(1000)
       }
+    end
+
+    context "自動販売機でコーラを選んだ場合" do
+      include_context "1000円入れた状態"
+
       let(:drink) {'cola'}
 
       it "自動販売機はコーラ出す" do
@@ -65,9 +70,8 @@ RSpec.describe VendingMachine do
     end
 
     context "自動販売機で綾鷹を選んだ場合" do
-      before {
-        machine.put_money(1000)
-      }
+      include_context "1000円入れた状態"
+
       let(:drink) {'ayataka'}
 
       it "自動販売機は綾鷹を出す" do
