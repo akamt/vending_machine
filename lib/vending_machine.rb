@@ -1,8 +1,10 @@
 require "vending_machine/version"
 
 class VendingMachine
+  DEFAULT_INSERTED_MONEY = 0
+
   def initialize(stocks=[])
-    @value = 0
+    init_value
     @stocks = stocks
   end
 
@@ -24,8 +26,13 @@ class VendingMachine
   end
 
   def get_change
-    change = @value
-    @value = 0
-    change
+    @value.tap {|_|
+      init_value
+    }
+  end
+
+  private
+  def init_value
+    @value = DEFAULT_INSERTED_MONEY
   end
 end
