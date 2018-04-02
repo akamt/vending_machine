@@ -1,4 +1,5 @@
 require "vending_machine/version"
+require "drink"
 
 class VendingMachine
   DEFAULT_INSERTED_MONEY = 0
@@ -17,10 +18,10 @@ class VendingMachine
   end
 
   def select(drink)
-    stock = @stocks.find{|x| x[:name] == drink}
-    if stock && stock[:price] <= @value
+    stock = @stocks.find{|x| x.name == drink}
+    if stock && stock.price <= @value
       # 買える時
-      @value -= stock[:price]
+      @value -= stock.price
       drink
     end
   end

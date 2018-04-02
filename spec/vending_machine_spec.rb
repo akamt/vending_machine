@@ -45,8 +45,8 @@ RSpec.describe VendingMachine do
   describe "#select" do
     let(:stocks) {
       [
-        { name: "cola",    price: 150 },
-        { name: "ayataka", price: 130 },
+        Drink.new(name: "cola",    price: 150),
+        Drink.new(name: "ayataka", price: 130),
       ]
     }
     let(:machine) { VendingMachine.new(stocks) }
@@ -111,8 +111,8 @@ RSpec.describe VendingMachine do
   describe "#get_change" do
     let(:stocks) {
       [
-        { name: "cola",    price: 150 },
-        { name: "ayataka", price: 130 },
+        Drink.new(name: "cola",    price: 150),
+        Drink.new(name: "ayataka", price: 130),
       ]
     }
 
