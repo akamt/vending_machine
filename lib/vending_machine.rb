@@ -1,8 +1,9 @@
 require "vending_machine/version"
 
 class VendingMachine
-  def initialize
+  def initialize(stocks=[])
     @value = 0
+    @stocks = stocks
   end
 
   def money
@@ -14,6 +15,9 @@ class VendingMachine
   end
 
   def select(drink)
-    drink
+    stock = @stocks.find{|x| x[:name] == drink}
+    if stock[:price] <= @value
+      drink
+    end
   end
 end

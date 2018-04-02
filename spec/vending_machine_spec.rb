@@ -43,13 +43,43 @@ RSpec.describe VendingMachine do
   end
 
   describe "#select" do
+    let(:stocks) {
+      [
+        { name: "cola",    price: 150 },
+        { name: "ayataka", price: 130 },
+      ]
+    }
+    let(:machine) { VendingMachine.new(stocks) }
+
     subject { machine.select(drink) }
-    
+
     context "自動販売機でコーラを選んだ場合" do
+      before {
+        machine.put_money(1000)
+      }
       let(:drink) {'cola'}
-      
+
       it "自動販売機はコーラ出す" do
         is_expected.to eq 'cola'
+      end
+    end
+
+    context "自動販売機で綾鷹を選んだ場合" do
+      before {
+        machine.put_money(1000)
+      }
+      let(:drink) {'ayataka'}
+
+      it "自動販売機は綾鷹を出す" do
+        is_expected.to eq 'ayataka'
+      end
+    end
+
+    context "お金が不足している場合" do
+      let(:drink) {'ayataka'}
+
+      it "買えない" do
+        is_expected.to be_nil
       end
     end
   end
