@@ -125,5 +125,17 @@ RSpec.describe VendingMachine do
         is_expected.to eq 370
       end
     end
+
+    context "500円入れた状態で綾鷹を買って、お釣りを返してもらった状態の場合" do
+      before {
+        machine.put_money(500)
+        machine.select('ayataka')
+        machine.get_change
+      }
+
+      it "0円返ってくる" do
+        is_expected.to eq 0
+      end
+    end
   end
 end

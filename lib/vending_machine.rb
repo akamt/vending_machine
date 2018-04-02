@@ -24,6 +24,8 @@ class VendingMachine
   end
 
   def get_change
-    @value
+    change = @value
+    @value = 0
+    change
   end
 end
