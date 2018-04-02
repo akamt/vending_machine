@@ -1,5 +1,6 @@
 require "vending_machine/version"
 require "drink"
+require "money"
 
 class VendingMachine
   DEFAULT_INSERTED_MONEY = 0
