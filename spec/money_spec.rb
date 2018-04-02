@@ -15,5 +15,12 @@ RSpec.describe Money do
         is_expected.to eq 100
       end
     end
+
+    context "500円の場合" do
+      let(:money) { Money.new(500) }
+      it "500になる" do
+        is_expected.to eq 500
+      end
+    end
   end
 end
