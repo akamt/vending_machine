@@ -12,4 +12,8 @@ class VendingMachine
   def put_money(value)
     @value += value
   end
+
+  def select(drink)
+    drink
+  end
 end

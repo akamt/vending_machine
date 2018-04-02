@@ -41,4 +41,16 @@ RSpec.describe VendingMachine do
       end
     end
   end
+
+  describe "#select" do
+    subject { machine.select(drink) }
+    
+    context "自動販売機でコーラを選んだ場合" do
+      let(:drink) {'cola'}
+      
+      it "自動販売機はコーラ出す" do
+        is_expected.to eq 'cola'
+      end
+    end
+  end
 end
