@@ -59,6 +59,12 @@ RSpec.describe VendingMachine do
       }
     end
 
+    shared_examples "買えない" do
+      it "買えない" do
+        is_expected.to be_nil
+      end
+    end
+
     context "自動販売機でコーラを選んだ場合" do
       include_context "1000円入れた状態"
 
@@ -79,20 +85,26 @@ RSpec.describe VendingMachine do
       end
     end
 
-    context "お金が不足している場合" do
+    context "お金を入れていない場合" do
       let(:drink) {'ayataka'}
 
-      it "買えない" do
-        is_expected.to be_nil
-      end
+      include_examples "買えない"
     end
 
     context "在庫にない商品を選択した場合" do
       let(:drink) {'Mets cola'}
 
-      it "買えない" do
-        is_expected.to be_nil
-      end
+      include_examples "買えない"
+    end
+
+    context "100円入れた状態で綾鷹を選択した場合" do
+      before {
+        machine.put_money(100)
+      }
+
+      let(:drink) {'ayataka'}
+
+      include_examples "買えない"
     end
   end
 
