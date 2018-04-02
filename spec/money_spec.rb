@@ -58,4 +58,29 @@ RSpec.describe Money do
       }
     end
   end
+
+  describe "#<=>" do
+    subject { me <=> other }
+
+    context "selfがotherより大きい場合" do
+      let(:me) { Money.new(100) }
+      let(:other) { Money.new(50) }
+
+      it { is_expected.to eq 1 }
+    end
+
+    context "selfとotherが等しい場合" do
+      let(:me) { Money.new(100) }
+      let(:other) { Money.new(100) }
+
+      it { is_expected.to eq 0 }
+    end
+
+    context "selfとotherが等しい場合" do
+      let(:me) { Money.new(50) }
+      let(:other) { Money.new(100) }
+
+      it { is_expected.to eq -1 }
+    end
+  end
 end

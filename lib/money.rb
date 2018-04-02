@@ -1,4 +1,6 @@
 class Money
+  include Comparable
+
   def initialize(amount=0)
     @amount = amount
   end
@@ -15,7 +17,13 @@ class Money
     Money.new(@amount - money.amount)
   end
 
-  def ==(other)
-    @amount == other.amount
+  def <=>(other)
+    if @amount > other.amount
+      1
+    elsif @amount == other.amount
+      0
+    elsif @amount < other.amount
+      -1
+    end
   end
 end
