@@ -1,5 +1,4 @@
 require "vending_machine/version"
 
-module VendingMachine
-  # Your code goes here...
+class VendingMachine
 end

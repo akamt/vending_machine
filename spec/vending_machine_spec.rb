@@ -5,7 +5,18 @@ RSpec.describe VendingMachine do
     expect(VendingMachine::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  let(:machine) { VendingMachine.new }
+
+  describe "#put_money" do
+    let(:money) { 100 }
+
+    subject { machine.put_money(money) }
+
+    context "空の自動販売機に100円入れた場合" do
+      it "自動販売機は100円持っている" do
+        subject
+        expect(machine.money).to eq 100
+      end
+    end
   end
 end
