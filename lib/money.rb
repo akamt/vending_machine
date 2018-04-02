@@ -6,4 +6,12 @@ class Money
   def amount
     @amount
   end
+
+  def +(money)
+    Money.new(@amount + money.amount)
+  end
+
+  def ==(other)
+    @amount == other.amount
+  end
 end

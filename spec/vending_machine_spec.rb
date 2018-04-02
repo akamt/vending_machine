@@ -11,7 +11,7 @@ RSpec.describe VendingMachine do
     subject { machine.put_money(money) }
 
     context "空の自動販売機に100円入れた場合" do
-      let(:money) { 100 }
+      let(:money) { Money.new(100) }
 
       it "自動販売機は100円持っている" do
         is_expected.to eq 100

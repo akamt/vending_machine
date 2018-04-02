@@ -23,4 +23,26 @@ RSpec.describe Money do
       end
     end
   end
+
+  describe "#+" do
+    subject { money_a + money_b }
+
+    context "0円と100円を足す場合" do
+      let(:money_a) { Money.new(0) }
+      let(:money_b) { Money.new(100) }
+
+      it {
+        is_expected.to eq Money.new(100)
+      }
+    end
+
+    context "100円と200円を足す場合" do
+      let(:money_a) { Money.new(100) }
+      let(:money_b) { Money.new(200) }
+
+      it {
+        is_expected.to eq Money.new(300)
+      }
+    end
+  end
 end

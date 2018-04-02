@@ -3,7 +3,7 @@ require "drink"
 require "money"
 
 class VendingMachine
-  DEFAULT_INSERTED_MONEY = 0
+  DEFAULT_INSERTED_MONEY = Money.new(0)
 
   def initialize(stocks=[])
     init_value
