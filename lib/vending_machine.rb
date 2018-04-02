@@ -17,6 +17,8 @@ class VendingMachine
   def select(drink)
     stock = @stocks.find{|x| x[:name] == drink}
     if stock[:price] <= @value
+      # 買える時
+      @value -= stock[:price]
       drink
     end
   end
