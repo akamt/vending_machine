@@ -82,5 +82,12 @@ RSpec.describe Money do
 
       it { is_expected.to eq -1 }
     end
+
+    context "selfとotherが比較出来ない場合" do
+      let(:me) { Money.new(50) }
+      let(:other) { 100 }
+
+      it { is_expected.to eq nil }
+    end
   end
 end

@@ -18,12 +18,14 @@ class Money
   end
 
   def <=>(other)
-    if @amount > other.amount
-      1
+    if !other.is_a?(Money)
+      nil
     elsif @amount == other.amount
       0
     elsif @amount < other.amount
       -1
+    elsif @amount > other.amount
+      1
     end
   end
 end
