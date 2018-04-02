@@ -86,6 +86,14 @@ RSpec.describe VendingMachine do
         is_expected.to be_nil
       end
     end
+
+    context "在庫にない商品を選択した場合" do
+      let(:drink) {'Mets cola'}
+
+      it "買えない" do
+        is_expected.to be_nil
+      end
+    end
   end
 
   describe "#get_change" do
