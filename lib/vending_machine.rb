@@ -20,4 +20,8 @@ class VendingMachine
       drink
     end
   end
+
+  def get_change
+    @value
+  end
 end

@@ -87,4 +87,43 @@ RSpec.describe VendingMachine do
       end
     end
   end
+
+  describe "#get_change" do
+    let(:stocks) {
+      [
+        { name: "cola",    price: 150 },
+        { name: "ayataka", price: 130 },
+      ]
+    }
+
+    let(:machine) { VendingMachine.new(stocks) }
+    subject { machine.get_change() }
+
+    context "何も入れていない場合" do
+      it "0円" do
+        is_expected.to eq 0
+      end
+    end
+
+    context "100円入れた状態でお釣りを返す場合" do
+      before {
+        machine.put_money(100)
+      }
+
+      it "100円が返ってくる" do
+        is_expected.to eq 100
+      end
+    end
+
+    context "500円入れた状態で綾鷹を買った場合" do
+      before {
+        machine.put_money(500)
+        machine.select('ayataka')
+      }
+
+      it "370円返ってくる" do
+        is_expected.to eq 370
+      end
+    end
+  end
 end
